@@ -18,5 +18,37 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone"
         android:text="@string/share_link" />
+    
+     <Button
+        android:id="@+id/btnShareLinkApi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="@string/share_link_with_api_calls" />
+     
+     <Button
+        android:id="@+id/btnMessageDialogLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="@string/share_link_message_dialog" />
+     
+      <Button
+        android:id="@+id/btnMessageDialogPhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="@string/share_photos_message_dialog" />
+      
+      <Button
+        android:id="@+id/btnMessageDialogOpenGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="@string/share_message_open_graph" />
 
 </LinearLayout>

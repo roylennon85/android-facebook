@@ -6,5 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="app_id">266995346841447</string>
     <string name="share_link">Share Link</string>
+    <string name="share_link_with_api_calls">Share link with API calls</string>
+    <string name="share_link_message_dialog">Share Link Message Dialog</string>
+    <string name="share_photos_message_dialog">Share Photos Message Dialog</string>
+    <string name="share_message_open_graph">Share Message Open Graph</string>
 
 </resources>

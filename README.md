@@ -65,3 +65,36 @@ More information about sharing can be found here: https://developers.facebook.co
 5. You can add description, caption, picture and more to the sharing message. Visit https://developers.facebook.com/docs/reference/android/current/class/FacebookDialog.ShareDialogBuilder/ for more information.
 6. You can handle responses from share dialog in the onActivityResult method: FacebookDialog.getNativeDialogDidComplete, FacebookDialog.getNativeDialogCompletionGesture, FacebookDialog.getNativeDialogPostId.
 7. If the user doesn't have Facebook app install, you should use the FeedDialog instead. See share() method in ShareDialogActivity.java class.
+
+Sharing using API calls
+
+1. Define publishing logic. See publishStory() method in MainFragment.java class.
+2. You need to verify publish permissions. Request permissions if user has not granted them.
+3. Create the Request callback that will handle the request response.
+4. Use a Request object to add info for the publication.
+5. Use a RequestAsyncTask to make the request.
+6. When handling session state changes, you need to handle the publish request. If there was a pending reauthorization, you need to publish the story if the result was ok.
+7. You need to save the pending publish reautorization value on the onSaveInstanceState() method.
+
+Sending a Message
+
+1. Using the Message Dialog requires that the user has Facebook Messenger installed. First, we need to check if Messenger is installed. See shareLinkMessage() method in MainFragment.java class.
+2. Create the Facebook Message Dialog with info to be sent in the message.
+3. If the Facebook Messenger app is present, show the Message Dialog.
+
+Sharing Photo in a Message
+
+1. Check if Facebook Messenger is installed.
+2. Create a FacebookDialog.PhotoMessageDialogBuilder.
+3. Add the images you want to share.
+4. See sharePhotosMessage() method in MainFragment.java class.
+
+Sending Open Graph Message
+
+1. Check if Facebook Messenger is installed.
+2. Use FacebookDialog.OpenGraphMessageDialogBuilder to create the dialog.
+3. See Open Graph section for more details.
+
+
+Open Graph Custom Stories
+ 
