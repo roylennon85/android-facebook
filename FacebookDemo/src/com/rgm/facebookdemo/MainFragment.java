@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookRequestError;
@@ -32,7 +34,7 @@ import com.facebook.Session;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.model.OpenGraphAction;
+import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 
@@ -50,7 +52,8 @@ public class MainFragment extends Fragment {
 	// TODO: UiLifecycleHelper helps to handle session changes.
 	private UiLifecycleHelper uiHelper;
 	
-	private Button btnShareLink, btnShareLinkApi, btnShareLinkMessageDialog, btnSharePhotosMessageDialog, btnShareOpenGraph;
+	private Button btnShareLink, btnShareLinkApi, btnShareLinkMessageDialog, btnSharePhotosMessageDialog, btnShareOpenGraph, btnStory;
+	private TextView userInformationTextView;
 	
 	// API publish variables.
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
@@ -116,7 +119,7 @@ public class MainFragment extends Fragment {
 		loginButton.setFragment(this);
 		
 		// TODO: Ask for permissions.
-		loginButton.setReadPermissions(Arrays.asList("user_likes", "user_status", "public_profile"));
+		loginButton.setReadPermissions(Arrays.asList("user_location", "user_birthday", "user_likes"));
 		
 		if(savedInstanceState != null){
 			pendingPublishReauthorization = savedInstanceState.getBoolean(PENDING_PUBLISH_KEY, false);
@@ -173,6 +176,19 @@ public class MainFragment extends Fragment {
 				shareOpenGraphMessage();
 			}
 		});
+		
+		btnStory = (Button) view.findViewById(R.id.btnStory);
+		btnStory.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), OpenGraphStoryActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		userInformationTextView = (TextView) view.findViewById(R.id.userInfoTextView);
+		
 	}
 	
 	// TODO: Handle state changes.
@@ -184,12 +200,25 @@ public class MainFragment extends Fragment {
 			btnShareLinkMessageDialog.setVisibility(View.VISIBLE);
 			btnSharePhotosMessageDialog.setVisibility(View.VISIBLE);
 			btnShareOpenGraph.setVisibility(View.VISIBLE);
+			btnStory.setVisibility(View.VISIBLE);
+			userInformationTextView.setVisibility(View.VISIBLE);
 			
 			// See if there was a pending publish authorization and if the token was updated.
 			if(pendingPublishReauthorization && state.equals(SessionState.OPENED_TOKEN_UPDATED)){
 				pendingPublishReauthorization = false;
 				publishStory();
 			}
+			
+			// TODO: Make user data request and process results.
+			Request.newMeRequest(session, new Request.GraphUserCallback() {
+				
+				@Override
+				public void onCompleted(GraphUser user, Response response) {
+					if(user != null){
+						userInformationTextView.setText(buildUserInDisplay(user));
+					}		
+				}
+			}).executeAsync();
 		}else if(state.isClosed()){
 			Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
 			btnShareLink.setVisibility(View.GONE);
@@ -197,6 +226,8 @@ public class MainFragment extends Fragment {
 			btnShareLinkMessageDialog.setVisibility(View.GONE);
 			btnSharePhotosMessageDialog.setVisibility(View.GONE);
 			btnShareOpenGraph.setVisibility(View.GONE);
+			btnStory.setVisibility(View.GONE);
+			userInformationTextView.setVisibility(View.GONE);
 		}
 	}
 	
@@ -311,5 +342,27 @@ public class MainFragment extends Fragment {
 		}else{
 			Toast.makeText(getActivity(), "Facebook Messenger needed for this", Toast.LENGTH_SHORT).show();
 		}*/
+	}
+	
+	// TODO: Parse user data.
+	private String buildUserInDisplay(GraphUser user){
+		StringBuilder userInfo = new StringBuilder("");
+		
+		userInfo.append(String.format("Name: %s\n\n", user.getName()));
+		userInfo.append(String.format("Birthday: %s\n\n", user.getBirthday()));
+		userInfo.append(String.format("Location: %s\n\n", user.getLocation().getProperty("name")));
+		userInfo.append(String.format("Locale: %s\n\n", user.getProperty("locale")));
+		JSONArray languages = (JSONArray) user.getProperty("languages");
+		if(languages.length() > 0){
+			ArrayList<String> languageNames = new ArrayList<String>();
+			for(int i = 0; i < languages.length(); i++){
+				JSONObject language = languages.optJSONObject(i);
+				languageNames.add(language.optString("name"));
+			}
+			
+			userInfo.append(String.format("Languages: %s\n\n", languageNames.toString()));
+		}
+		
+		return userInfo.toString();
 	}
 }

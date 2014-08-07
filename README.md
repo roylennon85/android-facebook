@@ -58,6 +58,8 @@ Sharing
 
 More information about sharing can be found here: https://developers.facebook.com/docs/android/share
 
+Sharing using  Share Dialog and Feed Dialog
+
 1. You need to create the UiLifecycleHelper as before.
 2. Configure callback handler that will be invoked when the share dialog is closed. Do this in the onActivityResult() method.
 3. Add all the uiLifecycleHelper methods as before (onCreate, onResume, etc).
@@ -98,3 +100,14 @@ Sending Open Graph Message
 
 Open Graph Custom Stories
  
+1. Setup everything to use Facebook Share Dialog. See OpenGraphStoryActivity.java class.
+2. Create the action you want to share. You can use predefined actions, or create your own. For more information go to https://developers.facebook.com/docs/android/open-graph and https://developers.facebook.com/docs/reference/opengraph/.
+3. To create a custom story, go to your app console at https://developers.facebook.com/apps then to Open Graph.
+4. Add your custom story, by creating an action and adding/editting properties.
+5. Share story with Facebook Dialog
+
+Fetch data using Graph API
+
+1. You need to ask for read permissions on login. See onCreateView() method on MainFragment.java.
+2. Define a method to parse the desired data from the user. See 
+3. Make request and process the results. See onSessionStateChanged() method on MainFragment.java.

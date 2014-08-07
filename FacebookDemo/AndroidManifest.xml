@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShareDialogActivity"></activity>
-
+		<activity android:name=".OpenGraphStoryActivity"></activity>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />

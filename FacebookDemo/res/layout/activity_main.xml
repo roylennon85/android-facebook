@@ -4,51 +4,81 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/btnShareLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/share_link" />
-    
-     <Button
-        android:id="@+id/btnShareLinkApi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/share_link_with_api_calls" />
-     
-     <Button
-        android:id="@+id/btnMessageDialogLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/share_link_message_dialog" />
-     
-      <Button
-        android:id="@+id/btnMessageDialogPhotos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/share_photos_message_dialog" />
-      
-      <Button
-        android:id="@+id/btnMessageDialogOpenGraph"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"
-        android:text="@string/share_message_open_graph" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.facebook.widget.LoginButton
+                android:id="@+id/authButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp" />
+
+            <Button
+                android:id="@+id/btnShareLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_link"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnShareLinkApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_link_with_api_calls"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnMessageDialogLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_link_message_dialog"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnMessageDialogPhotos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_photos_message_dialog"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnMessageDialogOpenGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_message_open_graph"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnStory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_story"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/userInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium" 
+                android:visibility="gone"
+                />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

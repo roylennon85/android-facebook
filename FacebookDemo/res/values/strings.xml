@@ -10,5 +10,6 @@
     <string name="share_link_message_dialog">Share Link Message Dialog</string>
     <string name="share_photos_message_dialog">Share Photos Message Dialog</string>
     <string name="share_message_open_graph">Share Message Open Graph</string>
+    <string name="share_story">Share story</string>
 
 </resources>
